@@ -13,6 +13,7 @@ class ScoreCardWidget extends StatelessWidget {
             padding: const EdgeInsets.all(16),
             height: 128,
             decoration: BoxDecoration(
+                border: Border.all(color: AppColors.border),
                 borderRadius: BorderRadius.circular(16),
                 color: AppColors.white,
             ),
@@ -24,7 +25,7 @@ class ScoreCardWidget extends StatelessWidget {
                         child: Padding(
                             padding: const EdgeInsets.only(left: 24),
                             child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                     Text(
@@ -34,7 +35,7 @@ class ScoreCardWidget extends StatelessWidget {
                                     Text(
                                         'Complete os desafios e avançe em conhecimento.',
                                         style: AppTextStyles.body
-                                    )
+                                    ),
                                 ]
                             )
                         )

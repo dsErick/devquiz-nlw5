@@ -7,9 +7,9 @@ import 'score_card/score_card_widget.dart';
 
 class AppBarWidget extends PreferredSize {
     AppBarWidget() : super(
-        preferredSize: Size.fromHeight(240),
+        preferredSize: Size.fromHeight(262),
         child: Container(
-            height: 240,
+            height: 262,
             child: Stack(
                 children: [
                     Container(
@@ -18,19 +18,19 @@ class AppBarWidget extends PreferredSize {
                         height: 160,
                         child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                                 Text.rich(
                                     TextSpan(
-                                        text: 'Olá, ',
-                                        style: AppTextStyles.title,
                                         children: [
+                                            TextSpan(text: 'Olá, ', style: AppTextStyles.title),
                                             TextSpan(text: 'Erick', style: AppTextStyles.titleBold)
                                         ]
                                     )
                                 ),
                                 Container(
-                                    width: 58,
-                                    height: 58,
+                                    width: 56,
+                                    height: 56,
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(8),
                                         image: DecorationImage(
@@ -42,7 +42,7 @@ class AppBarWidget extends PreferredSize {
                         ),
                     ),
                     Align(
-                        alignment: Alignment(0, 1.4),
+                        alignment: Alignment(0, 1),
                         child: Padding(
                             padding: EdgeInsets.symmetric(horizontal: 16),
                             child: ScoreCardWidget()
