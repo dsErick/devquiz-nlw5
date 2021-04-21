@@ -12,7 +12,7 @@ class ChartWidget extends StatelessWidget {
             width: 80,
             height: 80,
             child: Stack(
-                children: [
+                children: <Widget>[
                     Center(
                         child: Container(
                             width: 80,

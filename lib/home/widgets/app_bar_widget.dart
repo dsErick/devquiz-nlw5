@@ -11,18 +11,18 @@ class AppBarWidget extends PreferredSize {
         child: Container(
             height: 262,
             child: Stack(
-                children: [
+                children: <Widget>[
                     Container(
                         decoration: BoxDecoration(gradient: AppGradients.linear),
-                        padding: EdgeInsets.symmetric(horizontal: 16),
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
                         height: 160,
                         child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
+                            children: <Widget>[
                                 Text.rich(
                                     TextSpan(
-                                        children: [
+                                        children: <InlineSpan>[
                                             TextSpan(text: 'Olá, ', style: AppTextStyles.title),
                                             TextSpan(text: 'Erick', style: AppTextStyles.titleBold)
                                         ]
@@ -44,7 +44,7 @@ class AppBarWidget extends PreferredSize {
                     Align(
                         alignment: Alignment(0, 1),
                         child: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 16),
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
                             child: ScoreCardWidget()
                         )
                     ),

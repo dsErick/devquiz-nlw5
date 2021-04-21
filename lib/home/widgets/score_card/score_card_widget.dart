@@ -19,7 +19,7 @@ class ScoreCardWidget extends StatelessWidget {
             ),
             child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
+                children: <Widget>[
                     ChartWidget(),
                     Expanded(
                         child: Padding(
@@ -27,7 +27,7 @@ class ScoreCardWidget extends StatelessWidget {
                             child: Column(
                                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
+                                children: <Widget>[
                                     Text(
                                         'Vamos começar',
                                         style: AppTextStyles.heading
