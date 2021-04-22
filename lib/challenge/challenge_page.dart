@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:dev_quiz/challenge/question_indicator/question_indicator_widget.dart';
+import 'widgets/question_indicator/question_indicator_widget.dart';
+import 'widgets/quiz/quiz_widget.dart';
 
 class ChallengePage extends StatefulWidget {
     const ChallengePage({Key? key}) : super(key: key);
@@ -19,7 +20,8 @@ class _ChallengePageState extends State<ChallengePage> {
                     top: true,
                     child: QuestionIndicatorWidget()
                 )
-            )
+            ),
+            body: QuizWidget(title: 'O que o Flutter faz em sua totalidade?')
         );
     }
 }
