@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
 import 'package:dev_quiz/core/app_colors.dart';
-import 'package:dev_quiz/core/app_images.dart';
 import 'package:dev_quiz/core/app_text_styles.dart';
+import 'package:dev_quiz/shared/models/quiz_model.dart';
 import 'package:dev_quiz/shared/widgets/progress_indicator/progress_indicator_widget.dart';
 
 class QuizCardWidget extends StatelessWidget {
-    const QuizCardWidget({Key? key}) : super(key: key);
+    const QuizCardWidget({ Key? key, required this.quiz }) : super(key: key);
+
+    final QuizModel quiz;
 
     @override
     Widget build(BuildContext context) {
@@ -24,10 +26,10 @@ class QuizCardWidget extends StatelessWidget {
                     Container(
                         height: 40,
                         width: 40,
-                        child: Image.asset(AppImages.blocks),
+                        child: Image.asset(quiz.image),
                     ),
                     Text(
-                        'Gerenciamento de Estado',
+                        quiz.title,
                         style: AppTextStyles.heading15,
                         maxLines: 3,
                         overflow: TextOverflow.ellipsis
@@ -36,11 +38,14 @@ class QuizCardWidget extends StatelessWidget {
                         children: <Widget>[
                             Expanded(
                                 flex: 2,
-                                child: Text('3 de 10', style: AppTextStyles.body11),
+                                child: Text(
+                                    '${quiz.questionAnswered} de ${quiz.questions.length}',
+                                    style: AppTextStyles.body11,
+                                ),
                             ),
                             Expanded(
                                 flex: 3,
-                                child: ProgressIndicatorWidget(value: .3)
+                                child: ProgressIndicatorWidget(value: quiz.questionAnswered / quiz.questions.length)
                             ),
                         ]
                     )

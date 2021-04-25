@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'home_controller.dart';
 import 'widgets/app_bar_widget.dart';
 import 'widgets/level_button/level_button_widget.dart';
 import 'widgets/quiz_card/quiz_card_widget.dart';
@@ -12,10 +13,22 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+    final controller = HomeController();
+
+    @override
+    void initState() {
+        super.initState();
+
+        controller.getUser();
+        controller.getQuizzes();
+    }
+
     @override
     Widget build(BuildContext context) {
         return Scaffold(
-            appBar: AppBarWidget(),
+            appBar: AppBarWidget(
+                user: controller.user!,
+            ),
             body: Column(
                 children: <Widget>[
                     SizedBox(height: 24),
@@ -45,10 +58,10 @@ class _HomePageState extends State<HomePage> {
                                 mainAxisSpacing: 8,
                                 childAspectRatio: 1/1.15,
                                 children: <Widget>[
-                                    QuizCardWidget(),
-                                    QuizCardWidget(),
-                                    QuizCardWidget(),
-                                ],
+                                    ...controller.quizzes!.map((quiz) {
+                                        return QuizCardWidget(quiz: quiz);
+                                    }).toList(),
+                                ]
                             ),
                         ),
                     ),

@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 
 import 'package:dev_quiz/core/app_gradients.dart';
 import 'package:dev_quiz/core/app_text_styles.dart';
+import 'package:dev_quiz/shared/models/user_model.dart';
 
 import 'score_card/score_card_widget.dart';
 
 class AppBarWidget extends PreferredSize {
-    AppBarWidget() : super(
+    final UserModel user;
+    
+    AppBarWidget({ required this.user }) : super(
         preferredSize: Size.fromHeight(262),
         child: Container(
             height: 262,
@@ -24,7 +27,7 @@ class AppBarWidget extends PreferredSize {
                                     TextSpan(
                                         children: <InlineSpan>[
                                             TextSpan(text: 'Olá, ', style: AppTextStyles.title),
-                                            TextSpan(text: 'Erick', style: AppTextStyles.titleBold)
+                                            TextSpan(text: user.name, style: AppTextStyles.titleBold)
                                         ]
                                     )
                                 ),
@@ -34,7 +37,7 @@ class AppBarWidget extends PreferredSize {
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(8),
                                         image: DecorationImage(
-                                            image: NetworkImage('https://avatars.githubusercontent.com/u/57442687?v=4')
+                                            image: NetworkImage(user.photoUrl)
                                         )
                                     )
                                 )
