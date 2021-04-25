@@ -2,7 +2,7 @@ class UserModel {
     const UserModel({
         required this.name,
         required this.photoUrl,
-        required this.score,
+        this.score = 0,
     });
     
     final String name;
