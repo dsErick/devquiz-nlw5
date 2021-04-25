@@ -21,14 +21,18 @@ class _HomePageState extends State<HomePage> {
                     SizedBox(height: 24),
                     Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16),
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                                LevelButtonWidget(label: 'Fácil'),
-                                LevelButtonWidget(label: 'Médio'),
-                                LevelButtonWidget(label: 'Difícil'),
-                                LevelButtonWidget(label: 'Perito'),
-                            ]
+                        child: FractionallySizedBox(
+                            widthFactor: 1,
+                            child: Wrap(
+                                alignment: WrapAlignment.spaceBetween,
+                                spacing: 4,
+                                children: <Widget>[
+                                    LevelButtonWidget(label: 'Fácil'),
+                                    LevelButtonWidget(label: 'Médio'),
+                                    LevelButtonWidget(label: 'Difícil'),
+                                    LevelButtonWidget(label: 'Perito'),
+                                ]
+                            ),
                         ),
                     ),
                     SizedBox(height: 24),

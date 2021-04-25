@@ -4,10 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:dev_quiz/core/app_colors.dart';
 
 class LevelButtonWidget extends StatelessWidget {
-    LevelButtonWidget({
-        Key? key,
-        required this.label
-    }) : assert(['Fácil', 'Médio', 'Difícil', 'Perito'].contains(label)),
+    LevelButtonWidget({ Key? key, required this.label })
+        : assert(['Fácil', 'Médio', 'Difícil', 'Perito'].contains(label)),
         super(key: key);
 
     final String label;
