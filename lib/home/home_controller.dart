@@ -1,25 +1,45 @@
+import 'package:flutter/foundation.dart';
+
 import 'package:dev_quiz/core/app_images.dart';
 import 'package:dev_quiz/shared/models/answer_model.dart';
 import 'package:dev_quiz/shared/models/question_model.dart';
 import 'package:dev_quiz/shared/models/quiz_model.dart';
 import 'package:dev_quiz/shared/models/user_model.dart';
 
-import 'home_state.dart';
+enum HomeState {
+    success,
+    loading,
+    error,
+    empty
+}
 
 class HomeController {
-    HomeState state = HomeState.empty;
-    
     UserModel? user;
     List<QuizModel>? quizzes;
 
-    void getUser() {
+    final stateNotifier = ValueNotifier<HomeState>(HomeState.empty);
+
+    set state(HomeState state) => stateNotifier.value = state;
+    HomeState get state => stateNotifier.value;
+
+    void getUser() async {
+        state = HomeState.loading;
+
+        await Future.delayed(Duration(seconds: 3)); // Simulando uma chamada para a APi
+
         user = UserModel(
             name: 'Erick Silva',
             photoUrl: 'https://avatars.githubusercontent.com/u/57442687?v=4',
         );
+
+        state = HomeState.success;
     }
 
-    void getQuizzes() {
+    void getQuizzes() async {
+        state = HomeState.loading;
+
+        await Future.delayed(Duration(seconds: 3)); // Simulando uma chamada para a APi
+
         quizzes = [
             QuizModel(
                 title: 'NLW 5 Flutter',
@@ -48,5 +68,7 @@ class HomeController {
                 ],
             )
         ];
+
+        state = HomeState.success;
     }
 }

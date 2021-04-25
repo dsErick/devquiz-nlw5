@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:dev_quiz/core/app_colors.dart';
+
 import 'home_controller.dart';
 import 'widgets/app_bar_widget.dart';
 import 'widgets/level_button/level_button_widget.dart';
@@ -21,10 +23,22 @@ class _HomePageState extends State<HomePage> {
 
         controller.getUser();
         controller.getQuizzes();
+
+        controller.stateNotifier.addListener(() => setState(() {}));
     }
 
     @override
     Widget build(BuildContext context) {
+        if (controller.state == HomeState.loading) {
+            return Scaffold(
+                body: Center(
+                    child: CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation<Color>(AppColors.darkGreen),
+                    )
+                )
+            );
+        }
+
         return Scaffold(
             appBar: AppBarWidget(
                 user: controller.user!,
