@@ -22,19 +22,32 @@ class HomeController {
     set state(HomeState state) => stateNotifier.value = state;
     HomeState get state => stateNotifier.value;
 
+    int loadingBuffer = 0;
+
     void getUser() async {
         state = HomeState.loading;
+        loadingBuffer++;
 
+        await Future.delayed(Duration(seconds: 3));
         user = await repository.getUser();
 
-        state = HomeState.success;
+        loadingBuffer--;
+
+        if (loadingBuffer == 0) {
+            state = HomeState.success;
+        }
     }
 
     void getQuizzes() async {
         state = HomeState.loading;
+        loadingBuffer++;
 
         quizzes = await repository.getQuizzes();
 
-        state = HomeState.success;
+        loadingBuffer--;
+
+        if (loadingBuffer == 0) {
+            state = HomeState.success;
+        }
     }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:dev_quiz/core/app_colors.dart';
+import 'package:dev_quiz/shared/widgets/loading/loading_widget.dart';
 
 import 'home_controller.dart';
 import 'widgets/app_bar_widget.dart';
@@ -30,13 +30,7 @@ class _HomePageState extends State<HomePage> {
     @override
     Widget build(BuildContext context) {
         if (controller.state == HomeState.loading) {
-            return Scaffold(
-                body: Center(
-                    child: CircularProgressIndicator(
-                        valueColor: AlwaysStoppedAnimation<Color>(AppColors.darkGreen),
-                    )
-                )
-            );
+            return LoadingWidget();
         }
 
         return Scaffold(
