@@ -41,5 +41,40 @@
                 ]
             }
         ]
+    },
+    {
+        "title": "Análise de Projetos e Sistemas",
+        "image": "assets/images/hierarchy.png",
+        "questionAnswered": 1,
+        "level": "dificil",
+        "questions": [
+            {
+                "title": "Para que serve um diagrama?",
+                "answers": [
+                    { "title": "Apresentar uma versão abstraída de um determinado problema.", "isRight": true },
+                    { "title": "Encher linguiça", "isRight": false },
+                    { "title": "Sim", "isRight": false },
+                    { "title": "Não", "isRight": false }
+                ]
+            },
+            {
+                "title": "Para que serve um diagrama?",
+                "answers": [
+                    { "title": "Apresentar uma versão abstraída de um determinado problema.", "isRight": true },
+                    { "title": "Encher linguiça", "isRight": false },
+                    { "title": "Sim", "isRight": false },
+                    { "title": "Não", "isRight": false }
+                ]
+            },
+            {
+                "title": "Para que serve um diagrama?",
+                "answers": [
+                    { "title": "Apresentar uma versão abstraída de um determinado problema.", "isRight": true },
+                    { "title": "Encher linguiça", "isRight": false },
+                    { "title": "Sim", "isRight": false },
+                    { "title": "Não", "isRight": false }
+                ]
+            }
+        ]
     }
 ]
