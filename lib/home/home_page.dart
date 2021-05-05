@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:dev_quiz/challenge/challenge_page.dart';
 import 'package:dev_quiz/shared/widgets/loading/loading_widget.dart';
 
 import 'home_controller.dart';
@@ -65,9 +66,19 @@ class _HomePageState extends State<HomePage> {
                 crossAxisSpacing: 8,
                 mainAxisSpacing: 8,
                 childAspectRatio: 1 / 1.15,
+
+                //
                 children: <Widget>[
                   ...controller.quizzes!.map((quiz) {
-                    return QuizCardWidget(quiz: quiz);
+                    return GestureDetector(
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ChallengePage(),
+                        ),
+                      ),
+                      child: QuizCardWidget(quiz: quiz),
+                    );
                   }).toList(),
                 ],
               ),

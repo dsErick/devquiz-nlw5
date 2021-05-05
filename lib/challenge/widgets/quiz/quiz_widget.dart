@@ -15,6 +15,7 @@ class QuizWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
+          SizedBox(height: 24),
           Text(title, style: AppTextStyles.heading),
           SizedBox(height: 24),
           AnswerWidget(
