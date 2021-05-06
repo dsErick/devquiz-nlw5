@@ -10,37 +10,37 @@ class HomeController {
   UserModel? user;
   List<QuizModel>? quizzes;
 
-  final repository = HomeRepository();
+  final _repository = HomeRepository();
 
   final stateNotifier = ValueNotifier<HomeState>(HomeState.empty);
 
   set state(HomeState state) => stateNotifier.value = state;
   HomeState get state => stateNotifier.value;
 
-  int loadingBuffer = 0;
+  int _loadingBuffer = 0;
 
   void getUser() async {
     state = HomeState.loading;
-    loadingBuffer++;
+    _loadingBuffer++;
 
-    user = await repository.getUser();
+    user = await _repository.getUser();
 
-    loadingBuffer--;
+    _loadingBuffer--;
 
-    if (loadingBuffer == 0) {
+    if (_loadingBuffer == 0) {
       state = HomeState.success;
     }
   }
 
   void getQuizzes() async {
     state = HomeState.loading;
-    loadingBuffer++;
+    _loadingBuffer++;
 
-    quizzes = await repository.getQuizzes();
+    quizzes = await _repository.getQuizzes();
 
-    loadingBuffer--;
+    _loadingBuffer--;
 
-    if (loadingBuffer == 0) {
+    if (_loadingBuffer == 0) {
       state = HomeState.success;
     }
   }

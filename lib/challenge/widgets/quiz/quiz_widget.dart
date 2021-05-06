@@ -19,7 +19,7 @@ class QuizWidget extends StatelessWidget {
           SizedBox(height: 24),
           Text(
             question.title,
-            style: AppTextStyles.heading
+            style: AppTextStyles.heading,
           ),
           SizedBox(height: 24),
           ...question.answers.map((a) {

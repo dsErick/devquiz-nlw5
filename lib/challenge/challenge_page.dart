@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:dev_quiz/shared/models/question_model.dart';
 
+import 'challenge_controller.dart';
 import 'widgets/next_button/next_button_widget.dart';
 import 'widgets/question_indicator/question_indicator_widget.dart';
 import 'widgets/quiz/quiz_widget.dart';
@@ -16,7 +17,17 @@ class ChallengePage extends StatefulWidget {
 }
 
 class _ChallengePageState extends State<ChallengePage> {
-  int currentQuestion = 0;
+  final _controller = ChallengeController();
+  final _pageController = PageController();
+
+  @override
+  void initState() {
+    super.initState();
+
+    _pageController.addListener(() {
+      _controller.currentQuestion = _pageController.page!.toInt();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,13 +40,27 @@ class _ChallengePageState extends State<ChallengePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               BackButton(),
-              Expanded(child: QuestionIndicatorWidget()),
+              Expanded(
+                child: ValueListenableBuilder<int>(
+                  valueListenable: _controller.currentQuestionNotifier,
+                  builder: (_, int value, __) {
+                    return QuestionIndicatorWidget(
+                      currentQuestion: value + 1,
+                      questionsCount: widget.questions.length,
+                    );
+                  },
+                ),
+              ),
             ],
           ),
         ),
       ),
-      body: QuizWidget(
-        question: widget.questions[currentQuestion]
+      body: PageView(
+        physics: NeverScrollableScrollPhysics(),
+        controller: _pageController,
+        children: widget.questions.map((q) {
+          return QuizWidget(question: q);
+        }).toList(),
       ),
       bottomNavigationBar: SafeArea(
         bottom: true,
@@ -47,9 +72,10 @@ class _ChallengePageState extends State<ChallengePage> {
                 child: NextButtonWidget.white(
                   label: 'Pular',
                   onTap: () {
-                    if (currentQuestion > 0) {
-                      setState(() => currentQuestion--);
-                    }
+                    _pageController.nextPage(
+                      duration: Duration(milliseconds: 235),
+                      curve: Curves.linear,
+                    );
                   }
                 ),
               ),
@@ -57,11 +83,7 @@ class _ChallengePageState extends State<ChallengePage> {
               Expanded(
                 child: NextButtonWidget.darkGreen(
                   label: 'Confirmar',
-                  onTap: () {
-                    if (currentQuestion < widget.questions.length - 1) {
-                      setState(() => currentQuestion++);
-                    }
-                  }
+                  onTap: () {}
                 ),
               ),
             ],

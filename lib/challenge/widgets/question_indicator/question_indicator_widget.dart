@@ -4,7 +4,14 @@ import 'package:dev_quiz/core/app_text_styles.dart';
 import 'package:dev_quiz/shared/widgets/progress_indicator/progress_indicator_widget.dart';
 
 class QuestionIndicatorWidget extends StatelessWidget {
-  const QuestionIndicatorWidget({Key? key}) : super(key: key);
+  final int currentQuestion;
+  final int questionsCount;
+  
+  const QuestionIndicatorWidget({
+    Key? key,
+    required this.currentQuestion,
+    required this.questionsCount
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,16 +24,16 @@ class QuestionIndicatorWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Text(
-                'Questão 04',
+                'Questão $currentQuestion',
                 style: AppTextStyles.body,
               ),
               Text(
-                'de 10',
+                'de $questionsCount',
                 style: AppTextStyles.body,
               ),
             ],
           ),
-          ProgressIndicatorWidget(value: .4),
+          ProgressIndicatorWidget(value: currentQuestion / questionsCount),
         ],
       ),
     );
