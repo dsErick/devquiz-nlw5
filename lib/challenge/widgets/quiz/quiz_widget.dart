@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
 import 'package:dev_quiz/core/app_text_styles.dart';
+import 'package:dev_quiz/shared/models/question_model.dart';
 import '../answer/answer_widget.dart';
 
 class QuizWidget extends StatelessWidget {
-  final String title;
+  final QuestionModel question;
 
-  const QuizWidget({Key? key, required this.title}) : super(key: key);
+  const QuizWidget({Key? key, required this.question}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,22 +17,20 @@ class QuizWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           SizedBox(height: 24),
-          Text(title, style: AppTextStyles.heading),
+          Text(
+            question.title,
+            style: AppTextStyles.heading
+          ),
           SizedBox(height: 24),
-          AnswerWidget(
-            title: 'Possibilita a criação de de aplicativos compilados nativamente?'
-          ),
-          SizedBox(height: 8),
-          AnswerWidget(
-            title: 'Possibilita a criação de de aplicativos compilados nativamente?',
-            isRight: true,
-            isSelected: true,
-          ),
-          SizedBox(height: 8),
-          AnswerWidget(
-            title: 'Possibilita a criação de de aplicativos compilados nativamente?',
-            isSelected: true,
-          ),
+          ...question.answers.map((a) {
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: AnswerWidget(
+                title: a.title,
+                isRight: a.isRight,
+              ),
+            );
+          }).toList(),
         ],
       ),
     );

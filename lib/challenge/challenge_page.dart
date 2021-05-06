@@ -1,17 +1,23 @@
 import 'package:flutter/material.dart';
 
+import 'package:dev_quiz/shared/models/question_model.dart';
+
 import 'widgets/next_button/next_button_widget.dart';
 import 'widgets/question_indicator/question_indicator_widget.dart';
 import 'widgets/quiz/quiz_widget.dart';
 
 class ChallengePage extends StatefulWidget {
-  const ChallengePage({Key? key}) : super(key: key);
+  final List<QuestionModel> questions;
+
+  const ChallengePage({Key? key, required this.questions}) : super(key: key);
 
   @override
   _ChallengePageState createState() => _ChallengePageState();
 }
 
 class _ChallengePageState extends State<ChallengePage> {
+  int currentQuestion = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,15 +29,13 @@ class _ChallengePageState extends State<ChallengePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               BackButton(),
-              Expanded(
-                child: QuestionIndicatorWidget(),
-              ),
+              Expanded(child: QuestionIndicatorWidget()),
             ],
           ),
         ),
       ),
       body: QuizWidget(
-        title: 'O que o Flutter faz em sua totalidade?',
+        question: widget.questions[currentQuestion]
       ),
       bottomNavigationBar: SafeArea(
         bottom: true,
@@ -40,11 +44,25 @@ class _ChallengePageState extends State<ChallengePage> {
           child: Row(
             children: <Widget>[
               Expanded(
-                child: NextButtonWidget.white(label: 'Pular', onTap: () {}),
+                child: NextButtonWidget.white(
+                  label: 'Pular',
+                  onTap: () {
+                    if (currentQuestion > 0) {
+                      setState(() => currentQuestion--);
+                    }
+                  }
+                ),
               ),
               SizedBox(width: 8),
               Expanded(
-                child: NextButtonWidget.darkGreen(label: 'Confirmar', onTap: () {}),
+                child: NextButtonWidget.darkGreen(
+                  label: 'Confirmar',
+                  onTap: () {
+                    if (currentQuestion < widget.questions.length - 1) {
+                      setState(() => currentQuestion++);
+                    }
+                  }
+                ),
               ),
             ],
           ),
