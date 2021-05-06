@@ -32,29 +32,7 @@ class _ChallengePageState extends State<ChallengePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(82),
-        child: SafeArea(
-          top: true,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              BackButton(),
-              Expanded(
-                child: ValueListenableBuilder<int>(
-                  valueListenable: _controller.currentQuestionNotifier,
-                  builder: (_, int value, __) {
-                    return QuestionIndicatorWidget(
-                      currentQuestion: value + 1,
-                      questionsCount: widget.questions.length,
-                    );
-                  },
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
+      appBar: _appBar(),
       body: PageView(
         physics: NeverScrollableScrollPhysics(),
         controller: _pageController,
@@ -62,32 +40,81 @@ class _ChallengePageState extends State<ChallengePage> {
           return QuizWidget(question: q);
         }).toList(),
       ),
-      bottomNavigationBar: SafeArea(
-        bottom: true,
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: Row(
-            children: <Widget>[
-              Expanded(
-                child: NextButtonWidget.white(
-                  label: 'Pular',
-                  onTap: () {
-                    _pageController.nextPage(
-                      duration: Duration(milliseconds: 235),
-                      curve: Curves.linear,
+      bottomNavigationBar: _bottomNavigationBar(),
+    );
+  }
+
+  // AppBar da ChallengePage
+  PreferredSize _appBar() {
+    return PreferredSize(
+      preferredSize: Size.fromHeight(82),
+      child: SafeArea(
+        top: true,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            BackButton(),
+            Expanded(
+              child: ValueListenableBuilder<int>(
+                builder: (_, int value, __) {
+                  return QuestionIndicatorWidget(
+                    currentQuestion: value + 1,
+                    questionsCount: widget.questions.length,
+                  );
+                },
+                valueListenable: _controller.currentQuestionNotifier,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // BottomNavigationBar da ChallengePage
+  Widget _bottomNavigationBar() {
+    return SafeArea(
+      bottom: true,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        child: Row(
+          children: <Widget>[
+            Expanded(
+              child: NextButtonWidget.white(
+                label: 'Voltar',
+                onTap: () {
+                  _pageController.previousPage(
+                    duration: Duration(milliseconds: 235),
+                    curve: Curves.linear,
+                  );
+                }
+              ),
+            ),
+            SizedBox(width: 8),
+            Expanded(
+              child: ValueListenableBuilder<int>(
+                builder: (_, int value, __) {
+                  if (value < widget.questions.length - 1) {
+                    return NextButtonWidget.white(
+                      label: 'Continuar',
+                      onTap: () {
+                        _pageController.nextPage(
+                          duration: Duration(milliseconds: 235),
+                          curve: Curves.linear,
+                        );
+                      }
+                    );
+                  } else {
+                    return NextButtonWidget.darkGreen(
+                      label: 'Finalizar',
+                      onTap: () => Navigator.pop(context),
                     );
                   }
-                ),
+                },
+                valueListenable: _controller.currentQuestionNotifier,
               ),
-              SizedBox(width: 8),
-              Expanded(
-                child: NextButtonWidget.darkGreen(
-                  label: 'Confirmar',
-                  onTap: () {}
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

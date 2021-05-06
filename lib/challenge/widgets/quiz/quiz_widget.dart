@@ -42,7 +42,7 @@ class QuizWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 8),
       child: GestureDetector(
-        onTap: () => _controller.selectedIndex = index,
+        onTap: () => _controller.selectAnswer(index),
         child: ValueListenableBuilder<int>(
           valueListenable: _controller.selectedIndexNotifier,
           builder: (_, int value, __) {
