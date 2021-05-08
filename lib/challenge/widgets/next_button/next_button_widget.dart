@@ -10,12 +10,13 @@ class NextButtonWidget extends StatelessWidget {
   final Color fontColor;
   final VoidCallback onTap;
 
+  /// Construtor padrão para um botão com fundo branco
   NextButtonWidget({
     required this.label,
-    required this.backgroundColor,
-    required this.borderColor,
-    required this.fontColor,
-    required this.onTap
+    required this.onTap,
+    this.backgroundColor = AppColors.white,
+    this.borderColor = AppColors.border,
+    this.fontColor = AppColors.grey,
   });
 
   /// Construtor para um botão com fundo verde
@@ -24,11 +25,11 @@ class NextButtonWidget extends StatelessWidget {
       this.borderColor = AppColors.darkShadeGreen,
       this.fontColor = AppColors.white;
 
-  /// Construtor para um botão com fundo branco
-  NextButtonWidget.white({ required this.label, required this.onTap })
-    : this.backgroundColor = AppColors.white,
-      this.borderColor = AppColors.border,
-      this.fontColor = AppColors.grey;
+  /// Construtor para um botão com fundo roxo
+  NextButtonWidget.purple({ required this.label, required this.onTap })
+    : this.backgroundColor = AppColors.purple,
+      this.borderColor = AppColors.purpleShade,
+      this.fontColor = AppColors.white;
 
   @override
   Widget build(BuildContext context) {

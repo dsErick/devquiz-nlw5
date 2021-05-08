@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:dev_quiz/result/result_page.dart';
 import 'package:dev_quiz/shared/models/question_model.dart';
 
 import 'challenge_controller.dart';
@@ -80,7 +81,7 @@ class _ChallengePageState extends State<ChallengePage> {
         child: Row(
           children: <Widget>[
             Expanded(
-              child: NextButtonWidget.white(
+              child: NextButtonWidget(
                 label: 'Voltar',
                 onTap: () {
                   _pageController.previousPage(
@@ -93,9 +94,9 @@ class _ChallengePageState extends State<ChallengePage> {
             SizedBox(width: 8),
             Expanded(
               child: ValueListenableBuilder<int>(
-                builder: (_, int value, __) {
+                builder: (BuildContext context, int value, __) {
                   if (value < widget.questions.length - 1) {
-                    return NextButtonWidget.white(
+                    return NextButtonWidget(
                       label: 'Continuar',
                       onTap: () {
                         _pageController.nextPage(
@@ -107,7 +108,12 @@ class _ChallengePageState extends State<ChallengePage> {
                   } else {
                     return NextButtonWidget.darkGreen(
                       label: 'Finalizar',
-                      onTap: () => Navigator.pop(context),
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => ResultPage()
+                        ),
+                      ),
                     );
                   }
                 },
